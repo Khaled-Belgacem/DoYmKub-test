@@ -5,20 +5,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t KHA/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t kha/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run KHA/react-test npm test -- --coverage
+  - docker run kha/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t KHA/multi-client ./client
-  - docker build -t KHA/multi-nginx ./nginx
-  - docker build -t KHA/multi-server ./server
-  - docker build -t KHA/multi-worker ./worker
+  - docker build -t kha/multi-client ./client
+  - docker build -t kha/multi-nginx ./nginx
+  - docker build -t kha/multi-server ./server
+  - docker build -t kha/multi-worker ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push KHA/multi-client
-  - docker push KHA/multi-nginx
-  - docker push KHA/multi-server
-  - docker push KHA/multi-worker
+  - docker push kha/multi-client
+  - docker push kha/multi-nginx
+  - docker push kha/multi-server
+  - docker push kha/multi-worker
